@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  firstdb:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: firstdb
+      POSTGRES_USER: root1
+      POSTGRES_PASSWORD: root1
+    ports:
+      - "5444:5432"
+    volumes:
+      - firstdb-data:/var/lib/postgresql/data
+    # command: >
+    #   bash -c "
+    #   docker-entrypoint.sh postgres &
+    #   sleep 10 &&
+    #   psql -U root1 -d firstdb -c \"CREATE TABLE public.users (user_id serial4 NOT NULL, name varchar(100) NULL, age int4 NULL, CONSTRAINT users_pkey PRIMARY KEY (user_id));\" &&
+    #   psql -U root1 -d firstdb -c \"INSERT INTO public.users (name, age) VALUES ('Steve', 30), ('David', 32), ('Smith', 33);\"
+    #   "
+
+  secdb:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: secdb
+      POSTGRES_USER: root2
+      POSTGRES_PASSWORD: root2
+    ports:
+      - "5445:5432"
+    volumes:
+      - secdb-data:/var/lib/postgresql/data
+    # command: >
+    #   bash -c "
+    #   docker-entrypoint.sh postgres &
+    #   sleep 10 &&
+    #   psql -U root2 -d secdb -c \"CREATE TABLE public.attendances (att_id serial4 NOT NULL, user_id int4 NULL, att_type varchar(50) NULL, reg_date timestamp NULL, CONSTRAINT attendances_pkey PRIMARY KEY (att_id));\" &&
+    #   psql -U root2 -d secdb -c \"INSERT INTO public.attendances (user_id, att_type, reg_date) VALUES (1, 'in', '2025-02-26 12:14:23.261818'), (1, 'in', '2025-02-26 12:15:04.106358'), (2, 'out', '2025-02-26 12:15:04.106358'), (3, 'in', '2025-02-26 12:15:04.106358'), (1, 'out', '2025-02-26 12:15:04.106358');\"
+    #   "
+
+volumes:
+  firstdb-data:
+  secdb-data:
