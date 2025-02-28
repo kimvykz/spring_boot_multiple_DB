@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    db1:
+      jdbc-url: jdbc:postgresql://localhost:5444/firstdb
+      username: root1
+      password: root1
+      driver-class-name: org.postgresql.Driver
+    db2:
+      jdbc-url: jdbc:postgresql://localhost:5445/secdb
+      username: root2
+      password: root2
+      driver-class-name: org.postgresql.Driver
+  jpa:
+    db1:
+      hibernate:
+        ddl-auto: none
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+    db2:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+server:
+  port: 9000
